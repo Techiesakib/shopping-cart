@@ -16,7 +16,7 @@
         <div class="container">
             <div class="cart">
                 <div class="col-md-12 col-lg-10 mx-auto">
-                    <div class="cart-item">
+                    <div class="cart-item" id="firstCartMinus">
                         <div class="row">
                             <div class="col-md-7 center-item">
                                 <img src="images/product-1.png" alt="">
@@ -25,17 +25,17 @@
 
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control text-center" id="firstInputValue" value="1">
+                                    <button class="btn btn-default"><i  id="firstRemove" class="fas fa-minus"></i></button>
+                                    <input type="text" class="form-control text-center" id="firstInput" value="1">
                                     <button class="btn btn-default"><i id="firstPlusButton"class="fas fa-plus"></i></button>
                                 </div>
                                 <h5>$ <span id="firstCartPrice">1200</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+                                <img src="images/remove.png" alt="" id="firstRemoveCart" class="remove-item">
                             </div>
                         </div>
                     </div>
 
-                    <div class="cart-item">
+                    <div class="cart-item" id="secondCartMinus">
                         <div class="row">
                             <div class="col-md-7 center-item mx-auto">
                                 <img src="images/product-2.png" alt="">
@@ -43,13 +43,13 @@
                             </div>
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <button class="btn btn-default"><i id="secondRemove" class="fas fa-minus"></i></button>
                                     <input type="text" id="secondInputValue" class="form-control text-center" value="1">
                                     <button class="btn btn-default"><i id="secondPlusButton" class="fas fa-plus"></i></button>
 
                                 </div>
                                 <h5>$ <span id="secondCartPrice">45</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+                                <img src="images/remove.png" id="secondRemoveCart" alt="" class="remove-item">
                             </div>
                         </div>
                     </div>
@@ -82,9 +82,9 @@
         //  firsCart
         const firstPlusButton = document.getElementById('firstPlusButton');
         firstPlusButton.addEventListener("click", function() {
-            const firstInputValue = document.getElementById("firstInputValue").value;
-            const firstInputNumber = parseFloat(firstInputValue);
-            document.getElementById("firstInputValue").value = firstInputNumber + 1;
+            const firstInput = document.getElementById('firstInput').value;
+            const firstInputNumber = parseFloat(firstInput);
+            document.getElementById("firstInput").value = firstInputNumber + 1;
 
             const firstCartPrice = document.getElementById("firstCartPrice").innerText;
             const firstCartNum = parseFloat(firstCartPrice);
@@ -129,6 +129,76 @@
             const total = document.getElementById('total').innerText;
             const totalNum = parseFloat(total);
             document.getElementById('total').innerText = subTotalNum + taxValueNum;
+        })
+
+        //  firstRemove
+        const firstRemove = document.getElementById('firstRemove');
+        firstRemove.addEventListener("click", function() {
+                const firstInput = document.getElementById('firstInput').value;
+                const firstInputNumber = parseFloat(firstInput);
+                if (firstInputNumber > 1) {
+                    document.getElementById("firstInput").value = firstInputNumber - 1;
+
+                    const firstCartPrice = document.getElementById("firstCartPrice").innerText;
+                    const firstCartNum = parseFloat(firstCartPrice);
+                    document.getElementById("firstCartPrice").innerText = firstCartNum - 1200;
+
+                    const subTotal = document.getElementById('subTotal').innerText;
+                    const subNum = parseFloat(subTotal);
+                    document.getElementById('subTotal').innerText = subNum - 1200;
+                    const subTotalNum = subNum - 1200;
+
+                    const tax = document.getElementById('tax').innerText;
+                    const taxNum = parseFloat(tax);
+                    document.getElementById('tax').innerText = taxNum - 5;
+                    const taxValueNum = taxNum + 5;
+
+                    const total = document.getElementById('total').innerText;
+                    const totalNum = parseFloat(total);
+                    document.getElementById('total').innerText = subTotalNum + taxValueNum;
+                }
+            })
+            //   secondRemoveCart
+        const secondRemove = document.getElementById('secondRemove');
+        secondRemove.addEventListener('click', function() {
+            const secondInputValue = document.getElementById('secondInputValue').value;
+            const secondInputNum = parseFloat(secondInputValue);
+            if (secondInputNum > 1) {
+                document.getElementById('secondInputValue').value = secondInputNum - 1;
+
+                const secondCartPrice = document.getElementById('secondCartPrice').innerText;
+                const secondCartNum = parseFloat(secondCartPrice);
+                document.getElementById('secondCartPrice').innerText = secondCartNum - 45;
+
+                const subTotal = document.getElementById('subTotal').innerText;
+                const subNum = parseFloat(subTotal);
+                document.getElementById('subTotal').innerText = subNum - 45;
+                const subTotalNum = subNum - 45;
+
+                const tax = document.getElementById('tax').innerText;
+                const taxNum = parseFloat(tax);
+                document.getElementById('tax').innerText = taxNum - 5;
+                const taxValueNum = taxNum + 5;
+
+                const total = document.getElementById('total').innerText;
+                const totalNum = parseFloat(total);
+                document.getElementById('total').innerText = subTotalNum + taxValueNum;
+            }
+
+        })
+
+        //   firstRemoveCart
+        const firstRemoveCart = document.getElementById('firstRemoveCart');
+        firstRemoveCart.addEventListener("click", function() {
+            const firstCartMinus = document.getElementById('firstCartMinus');
+            firstCartMinus.style.display = 'none';
+        })
+
+        //   secondRemoveCart
+        const secondRemoveCart = document.getElementById('secondRemoveCart');
+        secondRemoveCart.addEventListener("click", function() {
+            const secondCartMinus = document.getElementById('secondCartMinus');
+            secondCartMinus.style.display = 'none';
         })
     </script>
 </body>
